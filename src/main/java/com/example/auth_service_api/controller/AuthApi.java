@@ -1,4 +1,4 @@
-package com.example.auth_service_api.commons.controller;
+package com.example.auth_service_api.controller;
 
 import com.example.auth_service_api.commons.constants.ApiPathConstants;
 import com.example.auth_service_api.commons.dtos.TokenResponse;

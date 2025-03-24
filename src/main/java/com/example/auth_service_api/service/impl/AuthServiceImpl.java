@@ -1,10 +1,10 @@
-package com.example.auth_service_api.commons.service.impl;
+package com.example.auth_service_api.service.impl;
 
 import com.example.auth_service_api.commons.dtos.TokenResponse;
 import com.example.auth_service_api.commons.dtos.UserRequest;
 import com.example.auth_service_api.commons.entities.UserModel;
-import com.example.auth_service_api.commons.service.AuthService;
-import com.example.auth_service_api.commons.service.JwtService;
+import com.example.auth_service_api.service.AuthService;
+import com.example.auth_service_api.service.JwtService;
 import com.example.auth_service_api.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 

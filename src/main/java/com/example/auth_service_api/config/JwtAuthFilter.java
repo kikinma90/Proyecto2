@@ -1,7 +1,7 @@
 package com.example.auth_service_api.config;
 
 import com.example.auth_service_api.commons.entities.UserModel;
-import com.example.auth_service_api.commons.service.JwtService;
+import com.example.auth_service_api.service.JwtService;
 import com.example.auth_service_api.repositories.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

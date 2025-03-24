@@ -33,7 +33,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
-                .authorizeHttpRequests(request -> request.requestMatchers("v1/**", "/swagger-ui/**", "/swagger-ui.html")
+                .authorizeHttpRequests(request -> request.requestMatchers("v1/**", "/swagger-ui/**", "/swagger-ui.html", "/v1/auth/**")
                         .permitAll()
                         .anyRequest()
                         .authenticated())

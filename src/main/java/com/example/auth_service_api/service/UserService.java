@@ -1,4 +1,4 @@
-package com.example.auth_service_api.commons.service;
+package com.example.auth_service_api.service;
 
 import com.example.auth_service_api.commons.entities.UserModel;
 

@@ -1,7 +1,7 @@
-package com.example.auth_service_api.commons.service.impl;
+package com.example.auth_service_api.service.impl;
 
 import com.example.auth_service_api.commons.entities.UserModel;
-import com.example.auth_service_api.commons.service.UserService;
+import com.example.auth_service_api.service.UserService;
 import com.example.auth_service_api.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
