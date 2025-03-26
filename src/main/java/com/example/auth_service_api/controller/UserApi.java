@@ -6,8 +6,8 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping(ApiPathConstants.V1_ROUTE + ApiPathConstants.AUTH_ROUTE)
-@SecurityRequirement(name = "Bearer Authentication")
+@RequestMapping(ApiPathConstants.V1_ROUTE + ApiPathConstants.USER_ROUTE)
+@SecurityRequirement(name = "Bearer Authorization")
 public interface UserApi {
 
     @GetMapping()

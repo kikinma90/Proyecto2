@@ -7,6 +7,7 @@ import com.example.auth_service_api.commons.entities.UserModel;
 import com.example.auth_service_api.service.AuthService;
 import com.example.auth_service_api.service.JwtService;
 import com.example.auth_service_api.repositories.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -18,9 +19,12 @@ public class AuthServiceImpl implements AuthService {
 
     private final JwtService jwtService;
 
-    public AuthServiceImpl(UserRepository userRepository, JwtService jwtService) {
+    private final PasswordEncoder passwordEncoder;
+
+    public AuthServiceImpl(UserRepository userRepository, JwtService jwtService, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.jwtService = jwtService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -34,17 +38,16 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public TokenResponse loginUser(UserLogin userLogin) {
-        userRepository.findByEmail(userLogin.getEmail());
-        return Optional.of(userLogin)
-                .map(userModel -> userRepository.findByEmail(userLogin.getEmail()))
-                .map(userCreated -> jwtService.generateToken(userCreated.get().getUserId()))
-                .orElseThrow(() -> new RuntimeException("Error login user"));
+        return userRepository.findByEmail(userLogin.getEmail())
+                .filter(user -> passwordEncoder.matches(userLogin.getPassword(), user.getPassword()))
+                .map(user -> jwtService.generateToken(user.getUserId()))
+                .orElseThrow(() -> new RuntimeException("Invalid credentials"));
     }
 
     private UserModel mapToEntity(UserRequest userRequest) {
         return UserModel.builder()
                 .email(userRequest.getEmail())
-                .password(userRequest.getPassword())
+                .password(passwordEncoder.encode(userRequest.getPassword()))
                 .name(userRequest.getName())
                 .role("USER")
                 .build();
