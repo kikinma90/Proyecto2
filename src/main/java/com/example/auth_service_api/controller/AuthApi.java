@@ -2,6 +2,7 @@ package com.example.auth_service_api.controller;
 
 import com.example.auth_service_api.commons.constants.ApiPathConstants;
 import com.example.auth_service_api.commons.dtos.TokenResponse;
+import com.example.auth_service_api.commons.dtos.UserLogin;
 import com.example.auth_service_api.commons.dtos.UserRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,6 @@ public interface AuthApi {
 
     @PostMapping(value = "/login")
     ResponseEntity<TokenResponse> loginUser(
-            @PathVariable String userEmail,
-            @PathVariable String userPassword
+            @RequestBody @Valid UserLogin userLogin
     );
 }

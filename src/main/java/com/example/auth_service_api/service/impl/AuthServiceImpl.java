@@ -1,6 +1,7 @@
 package com.example.auth_service_api.service.impl;
 
 import com.example.auth_service_api.commons.dtos.TokenResponse;
+import com.example.auth_service_api.commons.dtos.UserLogin;
 import com.example.auth_service_api.commons.dtos.UserRequest;
 import com.example.auth_service_api.commons.entities.UserModel;
 import com.example.auth_service_api.service.AuthService;
@@ -32,13 +33,12 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public TokenResponse loginUser(String userEmail, String userPassword) {
-        return null;
-        /*return Optional.of(userRequest)
-                .map(this::mapToEntity)
-                .map(userRepository::save)
-                .map(userLogin -> jwtService.generateToken(userLogin.getUserEmail()))
-                .orElseThrow(() -> new RuntimeException("Error login user"));*/
+    public TokenResponse loginUser(UserLogin userLogin) {
+        userRepository.findByEmail(userLogin.getEmail());
+        return Optional.of(userLogin)
+                .map(userModel -> userRepository.findByEmail(userLogin.getEmail()))
+                .map(userCreated -> jwtService.generateToken(userCreated.get().getUserId()))
+                .orElseThrow(() -> new RuntimeException("Error login user"));
     }
 
     private UserModel mapToEntity(UserRequest userRequest) {

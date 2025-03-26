@@ -15,14 +15,14 @@ public interface UserApi {
             @RequestAttribute("X-User-Id") Long userId
     );
 
-    @PutMapping(value = "/{userId}")
+    @PutMapping()
     ResponseEntity<Void> updateUser(
-            @PathVariable Long userId,
+            @RequestAttribute("X-User-Id") Long userId,
             @RequestBody UserModel gameRequest
     );
 
-    @DeleteMapping(value = "/{userId}")
+    @DeleteMapping()
     ResponseEntity<Void> deleteUser(
-            @PathVariable Long userId
+            @RequestAttribute("X-User-Id") Long userId
     );
 }
